@@ -4,7 +4,7 @@
 const unsigned int interval = 1000;
 
 /* text to show if no value can be retrieved */
-static const char unknown_str[] = "n/a";
+static const char unknown_str[] = "N/A";
 
 /* maximum output string length */
 #define MAXLEN 2048
@@ -64,6 +64,17 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+	/* function         format          argument */
+  { cpu_perc,         "  %3s%% ",    NULL },
+  { temp,             "(%s °C) | ",   "/sys/class/thermal/thermal_zone6/temp" },
+  { ram_used,         " %7sB ",      NULL },
+  { ram_perc,         "(%s%%) | ",    NULL },
+  { run_command,      "%s | ",        "sb-volume" },
+  /* { netspeed_tx,      " %7sB ",      "wlp0s20f3" }, */
+  /* { netspeed_rx,      " %7sB | ",    "wlp0s20f3" }, */
+  { netspeed_tx_auto, " %7sB ",      "enp0s31f6,wlp0s20f3" },
+  { netspeed_rx_auto, " %7sB | ",    "enp0s31f6,wlp0s20f3" },
+	{ datetime,         "%s | ",        "%a, %b %d %R" },
+  { battery_perc,     "  %3s%% ",    "BAT0" },
+  { battery_state,    "(%s)",         "BAT0" },
 };

@@ -43,6 +43,8 @@ const char *load_avg(void);
 /* netspeeds */
 const char *netspeed_rx(const char *interface);
 const char *netspeed_tx(const char *interface);
+const char *netspeed_rx_auto(const char *interfaces);
+const char *netspeed_tx_auto(const char *interfaces);
 
 /* num_files */
 const char *num_files(const char *path);
