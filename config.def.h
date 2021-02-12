@@ -3,6 +3,9 @@
 /* interval between updates (in ms) */
 const unsigned int interval = 1000;
 
+/* interval for 'checkupdates' calls (in s) */
+const unsigned int checkupdates_interval = 1800;
+
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "N/A";
 
@@ -64,17 +67,15 @@ static const char unknown_str[] = "N/A";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function         format          argument */
-  { cpu_perc,         "  %3s%% ",    NULL },
-  { temp,             "(%s °C) | ",   "/sys/class/thermal/thermal_zone6/temp" },
-  { ram_used,         " %7sB ",      NULL },
-  { ram_perc,         "(%s%%) | ",    NULL },
+  /* function         format          argument */
+  { run_command,      "%s",           "sb-playback" },
+  /* { cpu_perc,         " %3s%% ",     NULL }, */
+  /* { run_command,      "(%s °C) | ",   "sb-cputemp" }, */
+  /* { ram_used,         " %7sB ",      NULL }, */
+  /* { ram_perc,         "(%s%%) | ",    NULL }, */
   { run_command,      "%s | ",        "sb-volume" },
-  /* { netspeed_tx,      " %7sB ",      "wlp0s20f3" }, */
-  /* { netspeed_rx,      " %7sB | ",    "wlp0s20f3" }, */
-  { netspeed_tx_auto, " %7sB ",      "enp0s31f6,wlp0s20f3" },
-  { netspeed_rx_auto, " %7sB | ",    "enp0s31f6,wlp0s20f3" },
-	{ datetime,         "%s | ",        "%a, %b %d %R" },
-  { battery_perc,     "  %3s%% ",    "BAT0" },
-  { battery_state,    "(%s)",         "BAT0" },
+  /* { netspeed_tx,      " %7sB ",      "enp6s0" }, */
+  /* { netspeed_rx,      " %7sB | ",    "enp6s0" }, */
+  { available_updates,"%s",           NULL },
+  { datetime,         "%s",           "%a, %b %d %R" },
 };

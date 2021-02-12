@@ -24,6 +24,7 @@ COM =\
 	components/separator\
 	components/swap\
 	components/temperature\
+	components/updates\
 	components/uptime\
 	components/user\
 	components/volume\

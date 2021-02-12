@@ -61,19 +61,42 @@
 	const char *
 	ram_used(void)
 	{
-		uintmax_t total, free, buffers, cached;
+		uintmax_t total, free, buffers, cached, slabs;
 
 		if (pscanf("/proc/meminfo",
 		           "MemTotal: %ju kB\n"
 		           "MemFree: %ju kB\n"
 		           "MemAvailable: %ju kB\n"
 		           "Buffers: %ju kB\n"
-		           "Cached: %ju kB\n",
-		           &total, &free, &buffers, &buffers, &cached) != 5) {
+		           "Cached: %ju kB\n"
+               "SwapCached: %ju kB\n"
+               "Active: %ju kB\n"
+               "Inactive: %ju kB\n"
+               "Active(anon): %ju kB\n"
+               "Inactive(anon): %ju kB\n"
+               "Active(file): %ju kB\n"
+               "Inactive(file): %ju kB\n"
+               "Unevictable: %ju kB\n"
+               "Mlocked: %ju kB\n"
+               "SwapTotal: %ju kB\n"
+               "SwapFree: %ju kB\n"
+               "Dirty: %ju kB\n"
+               "Writeback: %ju kB\n"
+               "AnonPages: %ju kB\n"
+               "Mapped: %ju kB\n"
+               "Shmem: %ju kB\n"
+               "KReclaimable: %ju kB\n"
+               "Slab: %ju kB\n"
+               "SReclaimable: %ju kB\n",
+		           &total, &free, &buffers, &buffers, &cached,
+               &slabs, &slabs, &slabs, &slabs, &slabs,
+               &slabs, &slabs, &slabs, &slabs, &slabs,
+               &slabs, &slabs, &slabs, &slabs, &slabs,
+               &slabs, &slabs, &slabs, &slabs) != 24) {
 			return NULL;
 		}
 
-		return fmt_human((total - free - buffers - cached) * 1024,
+		return fmt_human((total - free - buffers - cached - slabs) * 1024,
 		                 1024);
 	}
 #elif defined(__OpenBSD__)
